@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en" className={`${jetbrainsMono.variable}`}>
       <body className={"antialiased font-primary"}>
         <Header/>
-        fdssd
         {children}
       </body>
     </html>
