@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Nav from "./Nav";
+import MobileNav from "./MobileNav";
 import { usePathname } from "next/navigation";
 
 
 export default function Header() {
     const pathname = usePathname();
   return (
-    <header className="py-8 xl:py-12 text-white bg-pink-50/20">
+    <header className="py-8 xl:py-12 text-white">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/">
         <h1 className="text-4xl font-semibold">
@@ -22,6 +23,10 @@ export default function Header() {
                    <Button>Hire Me</Button> 
                 }
             </Link>
+        </div>
+
+        <div className="xl:hidden">
+            <MobileNav></MobileNav>
         </div>
       </div>
     </header>
