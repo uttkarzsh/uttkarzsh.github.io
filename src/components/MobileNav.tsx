@@ -33,7 +33,7 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent className="flex flex-col">
             <div className="mt-5 mb-10 text-center text-2xl">
-                uttkarzsh.
+                uttkarzsh<span className="text-accent">.</span>
             </div>
             <nav className="flex flex-col justify-center items-center gap-8">
                 {links.map((link, index) => {

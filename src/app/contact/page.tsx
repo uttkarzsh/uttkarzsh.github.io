@@ -1,76 +1,149 @@
+"use client";
+
+import {FaGithub, FaLinkedin} from "react-icons/fa"
+import {RiTwitterXFill} from "react-icons/ri"
+import { CiMail } from "react-icons/ci";
+import { motion } from "framer-motion";
+import Image from "next/image";
+
 export default function Contact() {
   return (
     <section className="min-h-screen px-4 sm:px-6 lg:px-12 py-16 text-white">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-12 text-center">Contact Me</h1>
 
-      {/* Social Links */}
-      <div className="flex justify-center gap-6 mb-12">
-        <a
-          href="https://github.com/uttkarzsh"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"
+      <div className="w-full flex flex-col xl:flex-row items-center xl:items-start justify-center gap-12 xl:gap-24">
+  
+        {/* Left Column - Socials */}
+        <div className="flex flex-col items-start text-left">
+          <h1 className="mb-6 text-4xl font-semibold">My Socials</h1>
+
+          <div className="flex flex-col gap-4">
+            {/* GitHub */}
+            <a
+              href="https://github.com/uttkarzsh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="p-3 border border-white/20 rounded-full group-hover:border-accent group-hover:text-accent transition">
+                <FaGithub className="text-xl" />
+              </div>
+              <p className="text-gray-300 group-hover:text-accent transition">
+                @uttkarzsh
+              </p>
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://linkedin.com/in/uttkarsh-pawan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="p-3 border border-white/20 rounded-full group-hover:border-accent group-hover:text-accent transition">
+                <FaLinkedin className="text-xl" />
+              </div>
+              <p className="text-gray-300 group-hover:text-accent transition">
+                Uttkarsh Pawan
+              </p>
+            </a>
+
+            {/* X (Twitter) */}
+            <a
+              href="https://x.com/uttkarzsh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="p-3 border border-white/20 rounded-full group-hover:border-accent group-hover:text-accent transition">
+                <RiTwitterXFill className="text-xl" />
+              </div>
+              <p className="text-gray-300 group-hover:text-accent transition">
+                @uttkarzsh
+              </p>
+            </a>
+
+            {/* Mail */}
+            <a
+              href="mailto:uttkarsh.freelance@gmail.com"
+              className="flex items-center gap-3 group"
+            >
+              <div className="p-3 border border-white/20 rounded-full group-hover:border-accent group-hover:text-accent transition">
+                <CiMail className="text-xl" />
+              </div>
+              <p className="text-gray-300 group-hover:text-accent transition">
+                uttkarsh.freelance@gmail.com
+              </p>
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column - Image */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.8, duration: 0.4, ease: "easeIn" } }}
+          className="relative"
         >
-          <i className="fab fa-github text-xl"></i>
-        </a>
-        <a
-          href="https://linkedin.com/in/uttkarsh-pawan"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"
-        >
-          <i className="fab fa-linkedin text-xl"></i>
-        </a>
-        <a
-          href="https://x.com/uttkarzsh"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"
-        >
-          <i className="fab fa-x-twitter text-xl"></i>
-        </a>
+          <div className="w-[198px] h-[198px] xl:w-[298px] xl:h-[298px]">
+            <Image
+              src="/assets/photo2.png"
+              alt="imagehoto"
+              priority
+              quality={100}
+              fill
+              className="object-contain rounded-full"
+            />
+          </div>
+        </motion.div>
       </div>
 
-      {/* Contact Form */}
+      <h1 className="text-center text-4xl mb-6 mt-28 font-semibold">Let's Talk</h1>
       <form
-        action="mailto:your-email@example.com"
+        action="https://formspree.io/f/YOUR_FORM_ID"
         method="POST"
-        encType="text/plain"
-        className="max-w-2xl mx-auto bg-black/40 border border-white/10 rounded-2xl shadow-lg p-6 sm:p-8"
+        className="max-w-2xl mx-auto bg-black/40 border border-white/10 rounded-2xl shadow-lg p-8 space-y-6"
       >
-        <div className="mb-4">
-          <label className="block text-sm mb-2">Name</label>
+        <p className="text-gray-300">
+          Drop me a message whether you want to <span className="text-accent">hire me</span>, 
+          collaborate on a project, or just say hi.
+        </p>
+
+        {/* Name */}
+        <div>
+          <label className="block text-sm mb-2 text-gray-400">Name</label>
           <input
             type="text"
             name="name"
             required
-            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-accent"
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm mb-2">Email</label>
+        {/* Email */}
+        <div>
+          <label className="block text-sm mb-2 text-gray-400">Email</label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-accent"
           />
         </div>
 
-        <div className="mb-6">
-          <label className="block text-sm mb-2">Message</label>
+        {/* Message */}
+        <div>
+          <label className="block text-sm mb-2 text-gray-400">Message</label>
           <textarea
             name="message"
             rows={5}
             required
-            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-lg bg-black/60 border border-white/20 text-white focus:outline-none focus:border-accent"
           ></textarea>
         </div>
 
+        {/* Button */}
         <button
           type="submit"
-          className="w-full sm:w-auto px-6 py-2 rounded-lg border border-blue-500 text-blue-400 hover:bg-blue-600/20 transition"
+          className="w-full sm:w-auto px-6 py-2 rounded-lg border border-accent text-accent hover:bg-blue-600/20 transition font-medium"
         >
           Send Message
         </button>
