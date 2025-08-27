@@ -6,7 +6,7 @@ export default function Contact() {
       {/* Social Links */}
       <div className="flex justify-center gap-6 mb-12">
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/uttkarzsh"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"
@@ -14,7 +14,7 @@ export default function Contact() {
           <i className="fab fa-github text-xl"></i>
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://linkedin.com/in/uttkarsh-pawan"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"
@@ -22,7 +22,7 @@ export default function Contact() {
           <i className="fab fa-linkedin text-xl"></i>
         </a>
         <a
-          href="https://x.com/yourusername"
+          href="https://x.com/uttkarzsh"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 border border-white/20 rounded-full hover:border-blue-500 hover:text-blue-400 transition"

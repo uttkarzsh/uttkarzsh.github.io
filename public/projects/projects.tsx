@@ -11,6 +11,20 @@ export const projects = [
       description:
         "A simple frontend interacting with a contract with basic read/write functions using ethers.js",
       image: "/assets/ethfunder.png",
-      tech: ["Solidity", "Foundry", "React", "ethers.js"],
+      tech: ["Foundry", "React", "ethers.js"],
+    },
+    {
+      title: "Merkle Airdrop",
+      description:
+        "A contract which airdrops ERC-20 tokens to predefined addresses using merkle trees and verifying through digital signatures [Built along with Cyfrin Updraft]",
+      image: "/assets/merkleairdrop.png",
+      tech: ["Solidity", "Foundry"],
+    },
+    {
+      title: "ZK-Ecrecover",
+      description:
+        "A ZK circuit written in Noir which verifies an address using ecrecover library [Built along with Cyfrin Updraft]",
+      image: "/assets/ecrecover.png",
+      tech: ["Noir", "Barretenberg", "Zero Knowledge"],
     },
   ];
