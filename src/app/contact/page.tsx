@@ -96,7 +96,7 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      <h1 className="text-center text-4xl mb-6 mt-28 font-semibold">Let's Talk</h1>
+      <h1 className="text-center text-4xl mb-6 mt-28 font-semibold">Let&apos;s Talk</h1>
       <form
         action="https://formspree.io/f/YOUR_FORM_ID"
         method="POST"

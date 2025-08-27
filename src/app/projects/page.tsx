@@ -1,6 +1,7 @@
 import { projects } from "./../../../public/projects/projects";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import Image from "next/image";
 
 export default function Projects() {
   return (
@@ -13,7 +14,7 @@ export default function Projects() {
             className="bg-black/40 border border-white/10 rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300"
           >
             {/* Project Image */}
-            <img
+            <Image
               src={project.image}
               alt={project.title}
               className="w-full h-48 sm:h-64 md:h-72 object-cover"
