@@ -14,7 +14,7 @@ export default function Contact() {
   
         {/* Left Column - Socials */}
         <div className="flex flex-col items-start text-left">
-          <h1 className="mb-6 text-4xl font-semibold">My Socials</h1>
+          <h1 className="mb-6 text-4xl font-semibold text-accent">My Socials</h1>
 
           <div className="flex flex-col gap-4">
             {/* GitHub */}

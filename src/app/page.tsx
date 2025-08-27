@@ -11,13 +11,13 @@ export default function Home() {
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-12 xl:pb-24">
           {/* Left Content */}
           <div className="text-center xl:text-left order-2 xl:order-none max-w-xl">
-            <h1 className="text-lg sm:text-2xl mb-2 text-gray-300">Hi, this is</h1>
-            <h2 className="text-5xl sm:text-6xl font-bold mb-2">Uttkarsh<span className="text-accent">,</span></h2>
+            <h1 className="text-lg sm:text-2xl mb-2 text-gray-300">Hi<span className="text-accent">,</span> this is</h1>
+            <h2 className="text-5xl sm:text-6xl font-bold mb-2">Uttkarsh<span className="text-accent">...</span></h2>
             <h3 className="text-lg sm:text-xl mb-4 text-gray-400">
-              A Web3 Developer & ZK Enthusiast.
+              A Web3 Developer & ZK Enthusiast<span className="text-accent">.</span>
             </h3>
             <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
-              I’m passionate about building scalable applications, exploring blockchain ecosystems, 
+              I&apos;m passionate about building scalable applications, exploring blockchain ecosystems, 
               and experimenting with cutting-edge technologies in Web3 and the tech world. 
               Always eager to learn, solve complex problems, and contribute to impactful projects.
             </p>

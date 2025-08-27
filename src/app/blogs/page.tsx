@@ -5,9 +5,9 @@ export default function Blogs() {
 
   return (
     <section className="min-h-screen px-4 sm:px-6 lg:px-12 py-12 text-white">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Blogs</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-accent">Blogs</h1>
       <div className="flex flex-col gap-8 max-w-3xl mx-auto">
-        {blogs.length === 0 ? (<div className="flex flex-col items-center mt-32"><ImSad className="text-8xl mb-8"/><p className="text-center">No blogs yet. Coming soon...</p></div>) : (blogs.map((blog, index) => (
+        {blogs.length === 0 ? (<div className="flex flex-col items-center mt-32"><ImSad className="text-5xl mb-8"/><p className="text-center">No blogs yet. Coming soon...</p></div>) : (blogs.map((blog, index) => (
           <div
             key={index}
             className="bg-black/40 border border-white/10 rounded-2xl shadow-lg p-4 sm:p-6 hover:scale-[1.02] transition-transform duration-300"

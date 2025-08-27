@@ -5,7 +5,7 @@ import { FiExternalLink } from "react-icons/fi";
 export default function Projects() {
   return (
     <section className="min-h-screen px-4 sm:px-6 lg:px-12 py-12 text-white">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Projects</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-accent">Projects</h1>
       <div className="flex flex-col gap-10 max-w-5xl mx-auto">
         {projects.map((project, index) => (
           <div
