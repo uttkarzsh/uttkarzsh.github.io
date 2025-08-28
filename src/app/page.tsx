@@ -2,6 +2,7 @@
 import Socials from "@/components/Socials";
 import Photo from "@/components/Photo";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -28,6 +29,16 @@ export default function Home() {
                 containerStyles="flex gap-6"
                 iconStyles="w-10 h-10 border border-accent rounded-full flex justify-center items-center text-accent text-lg hover:bg-accent hover:text-primary transition-all duration-500"
               />
+            </div>
+
+            {/* Extra Links */}
+            <div className="flex flex-col items-center xl:items-start gap-3 mt-8 text-accent text-sm sm:text-base font-medium">
+              <a href="/projects" className="flex items-center gap-2 hover:translate-x-1 transition-transform duration-300">
+                View Projects <span className="text-accent">→</span>
+              </a>
+              <a href="/blogs" className="flex items-center gap-2 hover:translate-x-1 transition-transform duration-300">
+                Read Blogs <span className="text-accent">→</span>
+              </a>
             </div>
           </div>
 
