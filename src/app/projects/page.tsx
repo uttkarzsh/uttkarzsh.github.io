@@ -14,11 +14,18 @@ export default function Projects() {
             className="bg-black/40 border border-white/10 rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300"
           >
             {/* Project Image */}
-            <Image
-              src={project.image}
-              alt={project.title}
-              className="w-full h-48 sm:h-64 md:h-72 object-cover"
-            />
+            <div className="relative w-full h-48 sm:h-64 md:h-72">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 640px) 100vw,
+                      (max-width: 768px) 100vw,
+                      (max-width: 1024px) 100vw,
+                      100vw"
+                className="object-cover"
+              />
+            </div>
 
             {/* Project Content */}
             <div className="p-4 sm:p-6">

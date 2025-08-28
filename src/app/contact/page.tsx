@@ -78,18 +78,18 @@ export default function Contact() {
         </div>
 
         {/* Right Column - Image */}
-        <motion.div
+       <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: 0.8, duration: 0.4, ease: "easeIn" } }}
           className="relative"
         >
-          <div className="w-[198px] h-[198px] xl:w-[298px] xl:h-[298px]">
+          <div className="relative w-[198px] h-[198px] xl:w-[298px] xl:h-[298px]">
             <Image
               src="/assets/photo2.png"
               alt="imagehoto"
               priority
-              quality={100}
               fill
+              sizes="(max-width: 1280px) 198px, 298px"
               className="object-contain rounded-full"
             />
           </div>
@@ -98,7 +98,7 @@ export default function Contact() {
 
       <h1 className="text-center text-4xl mb-6 mt-28 font-semibold">Let&apos;s Talk</h1>
       <form
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        action="https://formspree.io/f/xvgbgybe"
         method="POST"
         className="max-w-2xl mx-auto bg-black/40 border border-white/10 rounded-2xl shadow-lg p-8 space-y-6"
       >
