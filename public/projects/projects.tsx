@@ -9,15 +9,6 @@ export const projects = [
       live: ""
     },
     {
-      title: "ETHFunder",
-      description:
-        "A simple frontend interacting with a contract with basic read/write functions using ethers.js",
-      image: "/assets/ethfunder.png",
-      tech: ["Foundry", "React", "ethers.js"],
-      github: "https://github.com/uttkarzsh/ethfunder",
-      live: ""
-    },
-    {
       title: "Merkle Airdrop",
       description:
         "A contract which airdrops ERC-20 tokens to predefined addresses using merkle trees and verifying through digital signatures [Built along with Cyfrin Updraft]",
@@ -35,4 +26,13 @@ export const projects = [
       github: "https://github.com/uttkarzsh/zk-ecrecover",
       live: ""
     },
+    {
+      title: "ETHFunder",
+      description:
+        "A simple frontend interacting with a contract with basic read/write functions using ethers.js",
+      image: "/assets/ethfunder.png",
+      tech: ["Foundry", "React", "ethers.js"],
+      github: "https://github.com/uttkarzsh/ethfunder",
+      live: ""
+    }
   ];
