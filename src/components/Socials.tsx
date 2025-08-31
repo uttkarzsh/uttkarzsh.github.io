@@ -6,7 +6,7 @@ import {RiTwitterXFill} from "react-icons/ri"
 const socials = [
     {icon: <FaGithub/>, path:"https://github.com/uttkarzsh"},
     {icon: <FaLinkedin/>, path:"https://www.linkedin.com/in/uttkarsh-pawan/"},
-    {icon: <RiTwitterXFill/>, path:"https://x.com/uttkarzsh"},
+    {icon: <RiTwitterXFill/>, path:"https://x.com/0xuttkarzsh"},
 ]
 
 interface SocialsProps {
