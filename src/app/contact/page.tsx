@@ -58,7 +58,7 @@ export default function Contact() {
                 <RiTwitterXFill className="text-xl" />
               </div>
               <p className="text-gray-300 group-hover:text-accent transition">
-                @uttkarzsh
+                @0xuttkarzsh
               </p>
             </a>
 
