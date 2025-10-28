@@ -1,5 +1,14 @@
 export const projects = [
     {
+      title: "Karaage",
+      description:
+        "A cross-chain lending protocol secured through Zero-Knowledge proofs.",
+      image: "/assets/karaage.png",
+      tech: ["Foundry", "LayerZero", "React", "wagmi", "Noir"],
+      github: "https://github.com/uttkarzsh/karaage",
+      live: ""
+    },
+    {
       title: "yote: Your Own Decentralized Voting App",
       description:
         "A blockchain-based voting system ensuring transparency and security.",
