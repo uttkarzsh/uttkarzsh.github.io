@@ -9,12 +9,30 @@ export const projects = [
       live: ""
     },
     {
+      title: "SubZKrippy",
+      description:
+        "Pay for your subscriptions securely through subZKrippy",
+      image: "/assets/karaage.png",
+      tech: ["Foundry", "x402", "React", "wagmi", "Noir"],
+      github: "https://github.com/uttkarzsh/subzkrippy",
+      live: ""
+    },
+    {
       title: "yote: Your Own Decentralized Voting App",
       description:
         "A blockchain-based voting system ensuring transparency and security.",
       image: "/assets/yote.png",
       tech: ["Foundry", "React", "ethers.js"],
       github: "https://github.com/uttkarzsh/yote",
+      live: ""
+    },
+    {
+      title: "ZK Mixer",
+      description:
+        "A zk mixer inspired by Tornado Cash. [Built along with Cyfrin Updraft",
+      image: "/assets/karaage.png",
+      tech: ["Foundry", "Noir"],
+      github: "https://github.com/uttkarzsh/zk-mixer",
       live: ""
     },
     {
