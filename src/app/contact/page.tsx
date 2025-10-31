@@ -64,7 +64,7 @@ export default function Contact() {
 
             {/* Mail */}
             <a
-              href="mailto:uttkarsh.freelance@gmail.com"
+              href="mailto:utkbest@gmail.com"
               className="flex items-center gap-3 group"
             >
               <div className="p-3 border border-white/20 rounded-full group-hover:border-accent group-hover:text-accent transition">
@@ -98,7 +98,7 @@ export default function Contact() {
 
       <h1 className="text-center text-4xl mb-6 mt-28 font-semibold">Let&apos;s Talk</h1>
       <form
-        action="https://formspree.io/f/xvgbgybe"
+        action="https://formspree.io/f/xvgvvpql"
         method="POST"
         className="max-w-2xl mx-auto bg-black/40 border border-white/10 rounded-2xl shadow-lg p-8 space-y-6"
       >
