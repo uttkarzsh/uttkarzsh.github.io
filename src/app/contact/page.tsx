@@ -71,7 +71,7 @@ export default function Contact() {
                 <CiMail className="text-xl" />
               </div>
               <p className="text-gray-300 group-hover:text-accent transition">
-                uttkarsh.freelance@gmail.com
+                utkbest@gmail.com
               </p>
             </a>
           </div>
