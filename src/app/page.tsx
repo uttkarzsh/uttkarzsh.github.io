@@ -69,14 +69,13 @@ export default function Home() {
             {[
               "Solidity",
               "Foundry",
-              "viem/WAGMI",
               "Noir",
-              "JavaScript",
+              "viem/WAGMI",
+              "C++",
+              "Rust",
               "TypeScript",
+              "JavaScript",
               "MERN",
-              "TailwindCSS",
-              "DSA",
-              "Python",
             ].map((skill, i) => (
               <div
                 key={i}
