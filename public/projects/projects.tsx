@@ -1,5 +1,14 @@
 export const projects = [
     {
+      title: "EVM From Scratch",
+      description:
+        "An EVM implementation from scratch in C++",
+      image: "/assets/evm.png",
+      tech: ["C++", "CMake"],
+      github: "https://github.com/uttkarzsh/evm-from-scratch-cpp",
+      live: ""
+    },
+    {
       title: "Karaage",
       description:
         "A cross-chain lending protocol secured through Zero-Knowledge proofs.",
@@ -12,7 +21,7 @@ export const projects = [
       title: "SubZKrippy",
       description:
         "Pay for your subscriptions securely through subZKrippy",
-      image: "/assets/karaage.png",
+      image: "/assets/subzkrippy.png",
       tech: ["Foundry", "x402", "React", "wagmi", "Noir"],
       github: "https://github.com/uttkarzsh/subzkrippy",
       live: ""
