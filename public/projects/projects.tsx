@@ -39,7 +39,7 @@ export const projects = [
       title: "ZK Mixer",
       description:
         "A zk mixer inspired by Tornado Cash. [Built along with Cyfrin Updraft",
-      image: "/assets/karaage.png",
+      image: "/assets/zkmixer.png",
       tech: ["Foundry", "Noir"],
       github: "https://github.com/uttkarzsh/zk-mixer",
       live: ""
