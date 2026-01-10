@@ -9,6 +9,15 @@ export const projects = [
       live: ""
     },
     {
+      title: "ZK Sudoku",
+      description:
+        "Solve and verify your 4x4 sudoku solution using zk-proofs.",
+      image: "/assets/zksudoku.png",
+      tech: ["Noir", "Barretenberg", "Typescript", "Express"],
+      github: "https://github.com/uttkarzsh/zk-sudoku",
+      live: "https://zksudoku.netlify.app"
+    },
+    {
       title: "Karaage",
       description:
         "A cross-chain lending protocol secured through Zero-Knowledge proofs.",
