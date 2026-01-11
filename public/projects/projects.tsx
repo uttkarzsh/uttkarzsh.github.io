@@ -18,6 +18,24 @@ export const projects = [
       live: "https://zksudoku.netlify.app"
     },
     {
+      title: "Groth16 Implementation",
+      description:
+        "A Groth16 implementation in Rust",
+      image: "",
+      tech: ["Rust"],
+      github: "https://github.com/uttkarzsh/groth16-impl",
+      live: ""
+    },
+    {
+      title: "PLONK Implementation",
+      description:
+        "A PLONK implementation in Rust",
+      image: "",
+      tech: ["Rust"],
+      github: "https://github.com/uttkarzsh/plonk-impl",
+      live: ""
+    },
+    {
       title: "Karaage",
       description:
         "A cross-chain lending protocol secured through Zero-Knowledge proofs.",
