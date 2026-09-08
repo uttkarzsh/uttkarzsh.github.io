@@ -7,7 +7,7 @@ fn app() -> Html {
 
             // ── Navigation ──────────────────────────────────────
             <nav class="nav">
-                <a class="logo" href="#">{ "uttkarzsh" }</a>
+                <a class="logo" href="#">{ "" }</a>
 
                 <div class="nav-links">
                     <a href="#work">{ "work" }</a>
@@ -66,7 +66,7 @@ fn app() -> Html {
 
                     <div class="section-label">
                         <span>{ "01" }</span>
-                        <h2>{ "selected work" }</h2>
+                        <h2>{ "works" }</h2>
                     </div>
 
                     <div class="projects">
@@ -76,13 +76,15 @@ fn app() -> Html {
                             title="RiasOS"
                             description="A tiny 64-bit operating system written from scratch in Rust."
                             tags="Rust · x86_64 · OSDev"
-                        />
+                            github =  "https://github.com/uttkarzsh/rias"
+                       />
 
                         <Project
                             number="02"
                             title="EulaLang"
-                            description="an LLVM based compiler"
+                            description="an LLVM-based compiler"
                             tags="C++ · LLVM"
+                            github =  "https://github.com/uttkarzsh/eula-lang"
                         />
 
                         <Project
@@ -90,6 +92,7 @@ fn app() -> Html {
                             title="Groth16"
                             description="A Rust implementation of the Groth16 proving system"
                             tags="Rust · Elliptic Curve Cryptography · Arkworks"
+                            github =  "https://github.com/uttkarzsh/groth16-impl"
                         />
 
                     </div>
@@ -163,12 +166,13 @@ struct ProjectProps {
     title: AttrValue,
     description: AttrValue,
     tags: AttrValue,
+    github: AttrValue,
 }
 
 #[function_component(Project)]
 fn project(props: &ProjectProps) -> Html {
     html! {
-        <a class="project" href="#">
+        <a class="project" href={props.github.clone()} target="_blank" rel="noopener noreferrer">
 
             <div class="project-info">
 
