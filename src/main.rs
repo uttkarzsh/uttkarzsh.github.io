@@ -51,7 +51,7 @@ fn app() -> Html {
                             { "twitter/x ↗" }
                         </a>
                         <a
-                            href="https://linkedin.com/in/uttakrsh-pawan"
+                            href="https://linkedin.com/in/uttarsh-pawan"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -81,10 +81,10 @@ fn app() -> Html {
 
                         <Project
                             number="02"
-                            title="EulaLang"
-                            description="an LLVM-based compiler"
-                            tags="C++ · LLVM"
-                            github =  "https://github.com/uttkarzsh/eula-lang"
+                            title="Laniakea"
+                            description="A ZK Proving SDK for iOS"
+                            tags="Rust · Arkworks"
+                            github =  "https://github.com/uttkarzsh/laniakea"
                         />
 
                         <Project
