@@ -1,5 +1,43 @@
 use yew::prelude::*;
 
+// ─────────────────────────────────────────────────────────────────
+// Content
+// ─────────────────────────────────────────────────────────────────
+
+const SOCIALS: &[(&str, &str)] = &[
+    ("github", "https://github.com/uttkarzsh"),
+    ("twitter/x", "https://x.com/uttkarzsh"),
+    ("linkedin", "https://linkedin.com/in/uttkarsh-pawan"),
+];
+
+struct ProjectData {
+    title: &'static str,
+    description: &'static str,
+    tags: &'static str,
+    github: &'static str,
+}
+
+const PROJECTS: &[ProjectData] = &[
+    ProjectData {
+        title: "RiasOS",
+        description: "The crimson-kerneled x86_64 operating system written from scratch in Rust.",
+        tags: "Rust · x86-64 · Operating Systems",
+        github: "https://github.com/uttkarzsh/rias",
+    },
+    ProjectData {
+        title: "Laniakea",
+        description: "A ZK proving SDK for iOS devices",
+        tags: "Rust · Arkworks",
+        github: "https://github.com/uttkarzsh/laniakea",
+    },
+    ProjectData {
+        title: "Groth16",
+        description: "A Rust implementation of the Groth16 proving system",
+        tags: "Rust · Elliptic Curve Cryptography · Arkworks",
+        github: "https://github.com/uttkarzsh/groth16",
+    },
+];
+
 #[function_component(App)]
 fn app() -> Html {
     html! {
@@ -7,7 +45,10 @@ fn app() -> Html {
 
             // ── Navigation ──────────────────────────────────────
             <nav class="nav">
-                <a class="logo" href="#">{ "" }</a>
+                <a class="logo" href="#top">
+                    <span class="logo-dot"></span>
+                    { "uttkarzsh" }
+                </a>
 
                 <div class="nav-links">
                     <a href="#work">{ "work" }</a>
@@ -18,46 +59,42 @@ fn app() -> Html {
 
 
             // ── Hero ────────────────────────────────────────────
-            <main>
+            <main id="top">
 
                 <section class="hero">
-                    <p class="eyebrow">
-                        { "coder | larper | engineering student" }
+                    <p class="eyebrow reveal">
+                        { "coder | systems | inference" }
                     </p>
 
-                    <h1>
+                    <h1 class="reveal">
                         { "welcome to my" }
                         <span>{ " roman empire" }</span>
                     </h1>
 
-                    <p class="hero-description"><i>
+                    <p class="hero-description reveal"><i>
                         { "to make an apple pie from scratch, you must first invent the universe" }
                     </i></p>
 
-                    <div class="socials">
-                        <a
-                            href="https://github.com/uttkarzsh"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            { "github ↗" }
-                        </a>
-
-                        <a
-                            href="https://x.com/uttkarzsh"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            { "twitter/x ↗" }
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/uttarsh-pawan"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            { "linkedin ↗" }
-                        </a>
+                    <div class="socials reveal">
+                        { for SOCIALS.iter().map(|(label, href)| html! {
+                            <a href={*href} target="_blank" rel="noopener noreferrer">
+                                { *label }
+                                <span class="arrow">{ "↗" }</span>
+                            </a>
+                        }) }
                     </div>
+
+                    <figure class="art reveal">
+                        <ascii-art
+                            piece="cloud-sea"
+                            label="the sun sinking into a drifting sea of orange cloud at dusk"
+                        ></ascii-art>
+
+                        <figcaption>
+                            <span>{ "fig. 00" }</span>
+                            <span>{ "cloud sea" }</span>
+                        </figcaption>
+                    </figure>
                 </section>
 
 
@@ -70,31 +107,15 @@ fn app() -> Html {
                     </div>
 
                     <div class="projects">
-
-                        <Project
-                            number="01"
-                            title="RiasOS"
-                            description="A tiny 64-bit operating system written from scratch in Rust."
-                            tags="Rust · x86_64 · OSDev"
-                            github =  "https://github.com/uttkarzsh/rias"
-                       />
-
-                        <Project
-                            number="02"
-                            title="Laniakea"
-                            description="A ZK Proving SDK for iOS"
-                            tags="Rust · Arkworks"
-                            github =  "https://github.com/uttkarzsh/laniakea"
-                        />
-
-                        <Project
-                            number="03"
-                            title="Groth16"
-                            description="A Rust implementation of the Groth16 proving system"
-                            tags="Rust · Elliptic Curve Cryptography · Arkworks"
-                            github =  "https://github.com/uttkarzsh/groth16-impl"
-                        />
-
+                        { for PROJECTS.iter().enumerate().map(|(i, p)| html! {
+                            <Project
+                                number={format!("{:02}", i + 1)}
+                                title={p.title}
+                                description={p.description}
+                                tags={p.tags}
+                                github={p.github}
+                            />
+                        }) }
                     </div>
                 </section>
 
@@ -109,14 +130,14 @@ fn app() -> Html {
 
                     <div class="about-content">
                         <p>
-                            { "hi. i'm uttkarsh, an undergrad student from iit roorkee. \
-                            i work mostly with rust and sometimes c++." }
+                            { "hi. i'm uttkarsh, an undergrad engineering student from iit roorkee. \
+                            i work mostly with rust and sometimes c++ and python." }
                         </p>
 
                         <p>
-                            { "currently exploring kernels & operating systems, compiler design \
-                              and distributed systems. i also like ai and have a bit of experience \
-                              working with zero-knowledge proving systems and web3 in general." }
+                            { "currently exploring kernels & operating systems, compiler design & \
+                               inference engineering. i also have a bit of experience working \
+                               with zero-knowledge proving systems and web3 in general." }
                         </p>
                     </div>
 
@@ -132,14 +153,16 @@ fn app() -> Html {
                     </div>
 
                     <h2 class="contact-heading">
-                        { "Let's build something interesting." }
+                        { "Let's build something " }
+                        <span>{ "interesting." }</span>
                     </h2>
 
                     <a
                         class="contact-link"
                         href="mailto:utkbest@gmail.com"
                     >
-                        { "email ↗" }
+                        { "utkbest@gmail.com" }
+                        <span class="arrow">{ "↗" }</span>
                     </a>
                 </section>
 
@@ -149,7 +172,9 @@ fn app() -> Html {
             // ── Footer ──────────────────────────────────────────
             <footer>
                 <span>{ "entropy finds everyone" }</span>
-                <span>{ "built with yew.rs" }</span>
+                <a href="https://yew.rs" target="_blank" rel="noopener noreferrer">
+                    { "built with yew.rs" }
+                </a>
             </footer>
 
         </div>
@@ -174,11 +199,11 @@ fn project(props: &ProjectProps) -> Html {
     html! {
         <a class="project" href={props.github.clone()} target="_blank" rel="noopener noreferrer">
 
-            <div class="project-info">
+            <span class="project-number">
+                { &props.number }
+            </span>
 
-                <span class="project-number">
-                    { &props.number }
-                </span>
+            <div class="project-info">
 
                 <h3>
                     { &props.title }
