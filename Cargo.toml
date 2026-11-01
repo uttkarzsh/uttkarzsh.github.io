@@ -5,3 +5,8 @@ edition = "2024"
 
 [dependencies]
 yew = { version = "0.23", features = ["csr"] }
+gloo-events = "0.2"
+gloo-timers = "0.3"
+js-sys = "0.3"
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["Window", "Document", "Element", "DomRect", "Event", "KeyboardEvent", "MouseEvent", "Storage", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "MediaQueryList", "HtmlElement", "Node", "Range", "Selection", "InputEvent", "FocusEvent", "ScrollToOptions", "ScrollBehavior"] }

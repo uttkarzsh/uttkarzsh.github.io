@@ -4,11 +4,20 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# one deploy at a time; a newer push replaces a queued one, but a running deploy finishes
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  TRUNK_VERSION: v0.21.14
 
 jobs:
   build:
@@ -23,8 +32,15 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
 
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      # prebuilt binary: compiling trunk from source took most of the run
       - name: Install Trunk
-        run: cargo install trunk --locked
+        run: |
+          curl -sSfL "https://github.com/trunk-rs/trunk/releases/download/${TRUNK_VERSION}/trunk-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C /usr/local/bin trunk
+          trunk --version
 
       - name: Build
         run: trunk build --release

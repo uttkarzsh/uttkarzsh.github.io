@@ -475,6 +475,11 @@ dependencies = [
 name = "portfolio-website"
 version = "0.1.0"
 dependencies = [
+ "gloo-events",
+ "gloo-timers",
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
  "yew",
 ]
 

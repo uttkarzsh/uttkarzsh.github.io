@@ -1,418 +1,1083 @@
 /* ─────────────────────────────────────────────────────────────
-   Base
+   Tokens
    ───────────────────────────────────────────────────────────── */
-:root {
-    /* matches the ground of the cloud-sea ascii piece */
-    --background: #0e0e0f;
-    --foreground: #f2f2f0;
-    --muted: #8a8a8c;
-    --faint: #545456;
-    --border: #1f1f20;
-    /* one of the piece's oranges, used sparingly */
+/* Each theme follows one ascii piece: --bg is the piece's ground so the art sits flush,
+   and the accents and swatches are taken from its palette. */
+:root,
+:root[data-theme="cloud-sea"] {
+    --bg: #0e0e0f;
+    --bg-2: #131314;
+    --fg: #e6e4dc;
+    --muted: #8e8c86;
+    --faint: #57564f;
+    --line: #262628;
+    --line-hi: #3d3d40;
     --accent: #f6922e;
-    --mono:
-        "JetBrains Mono",
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Monaco,
-        Consolas,
-        monospace;
+    --accent-2: #8fb3c4;
+    --art-x: 70%;
+    --sw0: #0e0e0f; --sw1: #3a1e0c; --sw2: #7a3c12; --sw3: #c2621c;
+    --sw4: #f6922e; --sw5: #fbbf73; --sw6: #8fb3c4; --sw7: #e6e4dc;
 }
-* {
+
+:root[data-theme="kyoto-dusk"] {
+    --bg: #0b0a16;
+    --bg-2: #121120;
+    --fg: #ece6f2;
+    --muted: #9b93ae;
+    --faint: #5d5776;
+    --line: #23213a;
+    --line-hi: #3b3760;
+    --accent: #f2b2c4;
+    --accent-2: #ffbb6a;
+    --art-x: 64%;
+    --sw0: #0b0a16; --sw1: #262759; --sw2: #574a8c; --sw3: #8a5a92;
+    --sw4: #c4748f; --sw5: #f2b2c4; --sw6: #ffbb6a; --sw7: #fff1d8;
+}
+
+:root[data-theme="misty-forest"] {
+    --bg: #090f0e;
+    --bg-2: #0e1716;
+    --fg: #e4ebe6;
+    --muted: #8ca29d;
+    --faint: #4e625e;
+    --line: #1a2725;
+    --line-hi: #2e423e;
+    --accent: #f2c97e;
+    --accent-2: #86c0c2;
+    --art-x: 72%;
+    --sw0: #090f0e; --sw1: #172f2b; --sw2: #365952; --sw3: #4f8c93;
+    --sw4: #86c0c2; --sw5: #a4a35a; --sw6: #f2c97e; --sw7: #fffbea;
+}
+
+:root[data-theme="night-highway"] {
+    --bg: #07080f;
+    --bg-2: #0d0f1a;
+    --fg: #e8eaf4;
+    --muted: #8a90a8;
+    --faint: #4e5470;
+    --line: #1a1d2e;
+    --line-hi: #2f3552;
+    --accent: #3fd6c8;
+    --accent-2: #ffc477;
+    --art-x: 58%;
+    --sw0: #07080f; --sw1: #141b38; --sw2: #34457a; --sw3: #643474;
+    --sw4: #b85a78; --sw5: #f59a5c; --sw6: #ffc477; --sw7: #3fd6c8;
+}
+
+:root[data-theme="ocean-sunset"] {
+    --bg: #0b0817;
+    --bg-2: #120e22;
+    --fg: #f2e8ec;
+    --muted: #a093a8;
+    --faint: #5e5270;
+    --line: #221a36;
+    --line-hi: #3a2d55;
+    --accent: #f05d5e;
+    --accent-2: #ffcd62;
+    --art-x: 67%;
+    --sw0: #0b0817; --sw1: #2b1c52; --sw2: #6e2c78; --sw3: #b23c7c;
+    --sw4: #f05d5e; --sw5: #f99a43; --sw6: #ffcd62; --sw7: #fff5d8;
+}
+
+:root[data-theme="snow-train"] {
+    --bg: #070b16;
+    --bg-2: #0c1220;
+    --fg: #e6edf6;
+    --muted: #8d9ab0;
+    --faint: #4e5a72;
+    --line: #182033;
+    --line-hi: #2c3850;
+    --accent: #bccde4;
+    --accent-2: #ffc56e;
+    --art-x: 66%;
+    --sw0: #070b16; --sw1: #19284a; --sw2: #3b548a; --sw3: #7f99c6;
+    --sw4: #bccde4; --sw5: #f1f5fb; --sw6: #ffc56e; --sw7: #9a2c2e;
+}
+
+/* only while switching themes: crossfade every colour */
+:root[data-theming] *,
+:root[data-theming] *::before,
+:root[data-theming] *::after {
+    transition:
+        color 500ms ease,
+        background-color 500ms ease,
+        border-color 500ms ease !important;
+}
+
+:root {
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --gutter: 24px;
+    --bar-h: 40px;
+    --status-h: 28px;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: calc(var(--bar-h) + 28px);
 }
+
 body {
     margin: 0;
-    background: var(--background);
-    color: var(--foreground);
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+    /* the app keeps its own place on a language switch (see switch_lang) */
+    overflow-anchor: none;
+    transition: background-color 500ms ease;
+    padding-bottom: var(--status-h);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    font-variant-ligatures: none;
 }
+
 ::selection {
     background: var(--accent);
-    color: var(--background);
+    color: var(--bg);
 }
+
 a {
     color: inherit;
     text-decoration: none;
 }
+
 a:focus-visible {
-    outline: 1px solid var(--accent);
-    outline-offset: 4px;
-    border-radius: 2px;
+    outline: 1px dashed var(--accent);
+    outline-offset: 3px;
 }
-.arrow {
-    display: inline-block;
-    margin-left: 4px;
-    color: var(--faint);
-    transition:
-        transform 180ms ease,
-        color 180ms ease;
+
+ul,
+ol,
+dl,
+dd,
+dt,
+figure,
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    padding: 0;
 }
-a:hover .arrow {
+
+ul,
+ol {
+    list-style: none;
+}
+
+em {
+    font-style: italic;
+}
+
+kbd {
+    font: inherit;
+}
+
+.frame {
+    width: min(1180px, 100% - 2 * var(--gutter));
+    margin-inline: auto;
+}
+
+.hl {
     color: var(--accent);
-    transform: translate(2px, -2px);
 }
+
 /* ─────────────────────────────────────────────────────────────
-   Layout
+   Cursor + pulse
    ───────────────────────────────────────────────────────────── */
-.site {
-    width: min(840px, calc(100% - 64px));
-    margin: 0 auto;
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
-/* ─────────────────────────────────────────────────────────────
-   Navigation
-   ───────────────────────────────────────────────────────────── */
-.nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: rgba(14, 14, 15, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-}
-.logo-dot {
-    width: 7px;
-    height: 7px;
+
+.pulse {
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 10px rgba(246, 146, 46, 0.6);
+    animation: pulse 2.4s ease-out infinite;
 }
-.nav-links {
-    display: flex;
-    gap: 26px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+    }
+    70%,
+    100% {
+        box-shadow: 0 0 0 7px transparent;
+    }
 }
-.nav-links a {
-    transition: color 150ms ease;
-}
-.nav-links a:hover {
-    color: var(--foreground);
-}
+
 /* ─────────────────────────────────────────────────────────────
-   Hero
+   Top: tmux-style window list
    ───────────────────────────────────────────────────────────── */
-.hero {
-    padding: 120px 0 88px;
+.tabbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: var(--bar-h);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
 }
-.eyebrow {
-    margin: 0 0 22px;
+
+.tabbar-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.session {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg);
+    font-weight: 500;
+}
+
+.tabs {
+    display: flex;
+    gap: 2px;
     color: var(--muted);
-    font-family: var(--mono);
+}
+
+.tab {
+    padding: 1px 8px;
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+.tab:hover {
+    color: var(--fg);
+    background: var(--bg-2);
+}
+
+.tab-key {
+    color: var(--faint);
+}
+
+.tab.on {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.tab.on .tab-key {
+    color: var(--bg);
+}
+
+.tabbar-right {
+    display: flex;
+    align-items: center;
+    gap: 3ch;
+    margin-left: auto;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.lang {
+    color: var(--faint);
+}
+
+.lang-sep {
+    margin: 0 0.5ch;
+}
+
+.lang-btn {
+    padding: 0 0.5ch;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+.lang-btn:hover,
+.lang-btn:focus-visible {
+    color: var(--fg);
+    outline: none;
+}
+
+.lang-btn.on {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.clock {
+    display: flex;
+    gap: 3ch;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Bottom: vim-style status line
+   ───────────────────────────────────────────────────────────── */
+.status {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 20;
+    height: var(--status-h);
+    display: flex;
+    align-items: stretch;
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
     font-size: 11px;
-    letter-spacing: 0.02em;
+    line-height: var(--status-h);
+    white-space: nowrap;
 }
-.hero h1 {
-    max-width: 740px;
-    margin: 0;
-    color: var(--foreground);
-    font-size: clamp(44px, 7vw, 76px);
-    line-height: 0.98;
-    font-weight: 650;
-    letter-spacing: -0.06em;
+
+.status > span {
+    padding: 0 12px;
 }
-.hero h1 span {
-    color: #5e5e60;
+
+.mode {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
-.hero-description {
-    max-width: 520px;
-    margin: 30px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.65;
+
+.mode.insert {
+    background: var(--accent-2);
 }
-.socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 28px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
+
+.status-path {
+    color: var(--fg);
+    border-right: 1px solid var(--line);
 }
-.socials a {
-    transition: color 150ms ease;
+
+.status-fill {
+    flex: 1;
 }
-.socials a:hover {
-    color: var(--foreground);
+
+.status-keys kbd {
+    color: var(--fg);
 }
+
+.status-seg {
+    border-left: 1px solid var(--line);
+}
+
+.status-wpm {
+    border-left: 1px solid var(--line);
+    color: var(--accent-2);
+    white-space: pre;
+    font-variant-numeric: tabular-nums;
+}
+
+.status-theme {
+    color: var(--accent);
+}
+
+.status-pos {
+    min-width: 56px;
+    text-align: right;
+    border-left: 1px solid var(--line);
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+}
+
 /* ─────────────────────────────────────────────────────────────
-   ASCII art
+   Panes: border with the title set into it
    ───────────────────────────────────────────────────────────── */
-.art {
-    margin: 72px 0 0;
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 40px;
 }
-.art ascii-art {
-    aspect-ratio: 2 / 1;
-    /* soften the canvas edges into the page */
-    -webkit-mask-image:
-        linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
-        linear-gradient(to bottom, transparent, #000 10%, #000 85%, transparent);
-    -webkit-mask-composite: source-in;
-    mask-image:
-        linear-gradient(to right, transparent, #000 8%, #000 92%, transparent),
-        linear-gradient(to bottom, transparent, #000 10%, #000 85%, transparent);
-    mask-composite: intersect;
+
+.pane {
+    position: relative;
+    border: 1px solid var(--line);
+    transition: border-color 300ms ease, box-shadow 300ms ease;
 }
-.art figcaption {
+
+.pane.active {
+    border-color: var(--line-hi);
+}
+
+.pane-head {
+    position: absolute;
+    top: -0.8em;
+    left: 14px;
+    right: 14px;
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    margin-top: 14px;
-    color: var(--faint);
-    font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
+    line-height: 1.6;
+    pointer-events: none;
 }
-/* ─────────────────────────────────────────────────────────────
-   Sections
-   ───────────────────────────────────────────────────────────── */
-.section {
-    padding: 96px 0;
-    border-top: 1px solid var(--border);
+
+.pane-title,
+.pane-meta {
+    padding: 0 8px;
+    background: var(--bg);
+    font-size: inherit;
+    font-weight: 400;
 }
-.section-label {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 36px;
+
+.pane-title {
+    color: var(--fg);
+    transition: color 300ms ease;
 }
-.section-label span {
-    color: var(--accent);
-    font-family: var(--mono);
-    font-size: 11px;
+
+.pane-title::before {
+    content: "┤ ";
+    color: var(--line-hi);
 }
-.section-label h2 {
-    margin: 0;
-    color: var(--foreground);
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
+
+.pane-title::after {
+    content: " ├";
+    color: var(--line-hi);
 }
-/* ─────────────────────────────────────────────────────────────
-   Projects
-   ───────────────────────────────────────────────────────────── */
-.projects {
-    border-top: 1px solid var(--border);
-}
-.project {
-    display: grid;
-    grid-template-columns: 40px 1fr auto;
-    align-items: start;
-    gap: 20px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--border);
-    transition: padding 180ms ease;
-}
-.project:hover {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.project-number {
-    padding-top: 7px;
-    color: var(--faint);
-    font-family: var(--mono);
-    font-size: 11px;
-    transition: color 180ms ease;
-}
-.project:hover .project-number {
+
+.pane.active .pane-title {
     color: var(--accent);
 }
-.project h3 {
-    margin: 0;
-    color: var(--foreground);
-    font-size: 22px;
-    font-weight: 600;
+
+.pane-meta {
+    color: var(--faint);
+}
+
+.pane-body {
+    padding: 32px 28px 36px;
+}
+
+.pane-foot {
+    position: absolute;
+    bottom: -0.8em;
+    right: 14px;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.theme-btn {
+    padding: 0 8px;
+    border: 0;
+    background: var(--bg);
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+.theme-btn:hover,
+.theme-btn:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+    outline: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Shell bits
+   ───────────────────────────────────────────────────────────── */
+.prompt {
+    margin-bottom: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.cmdblock + .cmdblock {
+    margin-top: 36px;
+}
+
+.cwd {
+    color: var(--accent-2);
+}
+
+.cmd {
+    color: var(--fg);
+}
+
+/* ── Command blocks ─────────────────────────────────────────
+   Phases are set from Rust (see the Terminal section of main.rs):
+   idle → pre (prompt up) → typing → printing → done.
+   Output lines carry --i and print one after another. */
+.cmdblock.idle .prompt,
+.cmdblock.idle .ln,
+.cmdblock.pre .ln,
+.cmdblock.typing .ln {
+    opacity: 0;
+}
+
+.cmdblock.pre .prompt {
+    animation: print 120ms ease both;
+}
+
+.cmd {
+    white-space: pre;
+}
+
+/* the cursor: blinking while waiting, solid while keys land. Once a section's output is
+   in, it rests after the last character (the hint line), but only in the section you're
+   on, and gives way to the caret in insert mode. */
+.cmdblock.pre .prompt::after,
+.cmdblock.typing .prompt::after,
+.pane.active:not(.editing) .cmdblock.done .hint::after {
+    content: "";
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    vertical-align: -0.2em;
+    background: var(--accent);
+}
+
+.pane.active:not(.editing) .cmdblock.done .hint::after {
+    margin-left: 1ch;
+}
+
+.cmdblock.pre .prompt::after,
+.pane.active:not(.editing) .cmdblock.done .hint::after {
+    animation: blink 1.05s steps(1) infinite;
+}
+
+/* LINE_MS / PRINT_MS in main.rs */
+.cmdblock.printing .ln {
+    animation: print 180ms ease both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes print {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+}
+
+.listing-total {
+    margin-bottom: 10px;
+}
+
+.comment {
+    margin-top: 18px;
+    color: var(--faint);
+}
+
+.sub {
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+.soon {
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 300;
+    line-height: 1.15;
     letter-spacing: -0.04em;
 }
-.project-info p {
-    max-width: 520px;
-    margin: 7px 0 12px;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.5;
+
+/* ── Insert mode ────────────────────────────────────────────
+   contenteditable is set from Rust while in insert mode. */
+.editable[contenteditable] {
+    outline: none;
+    caret-color: var(--accent);
+    cursor: text;
 }
-.project-tags {
+
+/* the pane being edited lights up */
+.pane.editing {
+    border-color: var(--accent);
+    box-shadow: 0 0 28px -12px var(--accent);
+}
+
+.pane.editing .pane-title {
+    color: var(--accent);
+}
+
+.hint {
+    margin-top: 22px;
     color: var(--faint);
-    font-family: var(--mono);
+}
+
+.hint.on {
+    color: var(--accent-2);
+}
+
+.key {
+    padding: 0 0.5ch;
+    border: 0;
+    background: var(--bg-2);
+    color: var(--fg);
+    font: inherit;
+    cursor: pointer;
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+.key:hover,
+.key:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+    outline: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Hero: two panes side by side
+   ───────────────────────────────────────────────────────────── */
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 16px;
+}
+
+.title {
+    font-size: clamp(32px, 4.4vw, 60px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+}
+
+.title em {
+    color: var(--accent);
+}
+
+.quote {
+    margin-top: 22px;
+    max-width: 46ch;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 3ch;
+    margin-top: 18px;
+}
+
+.links a {
+    color: var(--accent-2);
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+.links a:hover {
+    background: var(--accent-2);
+    color: var(--bg);
+}
+
+.art-pane {
+    display: flex;
+    flex-direction: column;
+}
+
+.art-pane .pane-body {
+    flex: 1;
+    display: flex;
+    padding: 6px;
+}
+
+.art {
+    position: relative;
+    flex: 1;
+    min-height: 280px;
+    overflow: hidden;
+    container-type: size;
+}
+
+/* the piece is 2:1; fill the pane and crop whichever side overflows, keeping the sun in view */
+.art ascii-art {
+    position: absolute;
+    top: 50%;
+    left: var(--art-x);
+    width: max(100%, 200cqh);
+    transform: translate(calc(-1 * var(--art-x)), -50%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Work: directory-entry cards
+   ───────────────────────────────────────────────────────────── */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px 18px 18px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.card:hover,
+.card:focus-visible {
+    border-color: var(--accent);
+    background: var(--bg-2);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    color: var(--faint);
     font-size: 11px;
 }
-.project-arrow {
-    padding-top: 2px;
-    color: var(--faint);
-    font-size: 18px;
-    transition:
-        transform 180ms ease,
-        color 180ms ease;
-}
-.project:hover .project-arrow {
+
+.card:hover .card-top span:first-child {
     color: var(--accent);
-    transform: translate(3px, -3px);
 }
+
+.card-title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+}
+
+.card-title span {
+    padding: 0 4px;
+    margin-left: -4px;
+    transition: background-color 120ms ease, color 120ms ease;
+}
+
+/* the TUI "selected line": inverse video */
+.card:hover .card-title span,
+.card:focus-visible .card-title span {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.card-desc {
+    margin: 12px 0 18px;
+    color: var(--muted);
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    margin-top: auto;
+    color: var(--faint);
+    font-size: 12px;
+}
+
+.card:hover .card-tags {
+    color: var(--muted);
+}
+
+.card-link {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    color: var(--faint);
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card:hover .card-link {
+    color: var(--accent-2);
+}
+
 /* ─────────────────────────────────────────────────────────────
    About
    ───────────────────────────────────────────────────────────── */
-.about-content {
-    max-width: 640px;
+.lede {
+    max-width: 62ch;
+    font-size: clamp(16px, 1.6vw, 19px);
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
 }
-.about-content p {
-    margin: 0 0 22px;
+
+.lede em {
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+/* an fzf-style ">" pick list */
+.pick li {
+    display: flex;
+    color: var(--fg);
+}
+
+/* ">" sits right against the item, so every list lines up with the languages row */
+.pick li::before {
+    content: ">";
+    flex: none;
+    width: 1ch;
+    color: var(--accent);
+    visibility: hidden;
+}
+
+/* interests and themes keep a space between ">" and the item */
+.pick.interests li::before,
+.pick.themes li::before {
+    width: 2ch;
+}
+
+/* ">" only shows on the item under the pointer */
+.pick li:hover::before {
+    visibility: visible;
+}
+
+.pick.inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2ch;
+}
+
+.pick-btn {
+    padding: 0;
+    border: 0;
+    background: none;
     color: var(--muted);
-    font-size: 17px;
-    line-height: 1.7;
-    letter-spacing: -0.015em;
+    font: inherit;
+    cursor: pointer;
+    transition: color 120ms ease;
 }
-.about-content p:first-child {
-    color: var(--foreground);
+
+.pick-btn:hover,
+.pick-btn:focus-visible {
+    color: var(--fg);
+    outline: none;
 }
+
+.sel .pick-btn {
+    color: var(--accent);
+}
+
+.pick .aside {
+    margin-left: 2ch;
+}
+
+.pick li.swatches {
+    margin: 4px 0 8px;
+}
+
+.pick li.swatches::before {
+    visibility: hidden !important;
+}
+
+.sw {
+    width: 3ch;
+    height: 1.3em;
+}
+
+.sw0 { background: var(--sw0); outline: 1px solid var(--line); outline-offset: -1px; }
+.sw1 { background: var(--sw1); }
+.sw2 { background: var(--sw2); }
+.sw3 { background: var(--sw3); }
+.sw4 { background: var(--sw4); }
+.sw5 { background: var(--sw5); }
+.sw6 { background: var(--sw6); }
+.sw7 { background: var(--sw7); }
+
+.dim {
+    color: var(--faint);
+}
+
 /* ─────────────────────────────────────────────────────────────
    Contact
    ───────────────────────────────────────────────────────────── */
-.contact {
-    padding-bottom: 130px;
+.motd::before {
+    content: "> ";
+    color: var(--faint);
 }
-.contact-heading {
-    max-width: 640px;
-    margin: 0 0 28px;
-    color: var(--foreground);
-    font-size: clamp(34px, 5.5vw, 52px);
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: -0.06em;
+
+.email {
+    display: block;
+    margin-top: 14px;
+    width: fit-content;
+    max-width: 100%;
+    font-size: clamp(22px, 4.6vw, 56px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+    transition: color 150ms ease;
 }
-.contact-heading span {
-    color: #5e5e60;
+
+.email:hover {
+    color: var(--accent);
 }
-.contact-link {
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 13px;
-    border-bottom: 1px solid var(--faint);
-    padding-bottom: 4px;
-    transition:
-        color 150ms ease,
-        border-color 150ms ease;
-}
-.contact-link:hover {
-    color: var(--foreground);
-    border-color: var(--accent);
-}
+
 /* ─────────────────────────────────────────────────────────────
    Footer
    ───────────────────────────────────────────────────────────── */
-footer {
+.foot {
     display: flex;
     justify-content: space-between;
-    padding: 22px 0 30px;
-    border-top: 1px solid var(--border);
+    gap: 16px;
+    padding: 4px 0 40px;
     color: var(--faint);
-    font-family: var(--mono);
     font-size: 11px;
 }
-footer a {
-    transition: color 150ms ease;
+
+.foot a:hover {
+    color: var(--fg);
 }
-footer a:hover {
-    color: var(--foreground);
-}
+
 /* ─────────────────────────────────────────────────────────────
    Motion
    ───────────────────────────────────────────────────────────── */
-@keyframes rise {
+.art {
+    animation: fade 1600ms ease 200ms both;
+}
+
+@keyframes fade {
     from {
         opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
     }
 }
-.reveal {
-    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-.reveal:nth-child(2) { animation-delay: 80ms; }
-.reveal:nth-child(3) { animation-delay: 160ms; }
-.reveal:nth-child(4) { animation-delay: 240ms; }
-.reveal:nth-child(5) { animation-delay: 360ms; }
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
     }
-    .reveal {
-        animation: none;
+
+    .art,
+    .pulse,
+    .cmdblock *,
+    .cmdblock *::after {
+        animation: none !important;
     }
 }
+
 /* ─────────────────────────────────────────────────────────────
-   Mobile
+   Responsive
    ───────────────────────────────────────────────────────────── */
-@media (max-width: 600px) {
-    .site {
-        width: calc(100% - 32px);
-    }
-    .nav {
-        height: 58px;
-    }
-    .nav-links {
-        gap: 16px;
-        font-size: 11px;
-    }
-    .hero {
-        padding: 80px 0 64px;
-    }
-    .hero h1 {
-        font-size: clamp(42px, 13vw, 64px);
-    }
-    .hero-description {
-        font-size: 14px;
-    }
-    .art {
-        margin-top: 52px;
-    }
-    .art figcaption span:first-child {
+/* room for the key hints: drop the static segments first */
+@media (max-width: 1180px) {
+    .status-seg:not(.status-theme) {
         display: none;
     }
-    .section {
-        padding: 72px 0;
+}
+
+@media (max-width: 1000px) {
+    .status-theme {
+        display: none;
     }
-    .project {
-        grid-template-columns: 28px 1fr auto;
-        gap: 12px;
-        padding: 25px 0;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
     }
-    .project h3 {
-        font-size: 20px;
+
+    /* art first on narrow screens, like a splash */
+    .art-pane {
+        order: -1;
     }
-    .project-info p {
-        font-size: 13px;
+
+    .art {
+        min-height: 0;
+        height: clamp(220px, 50vw, 360px);
     }
-    footer {
-        flex-direction: column;
+
+    .status-keys {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --gutter: 12px;
+    }
+
+    main {
+        gap: 32px;
+        padding-top: 28px;
+    }
+
+    .clock,
+    .session .pulse {
+        display: none;
+    }
+
+    .tabbar-inner {
         gap: 8px;
+    }
+
+    .tab {
+        padding: 1px 5px;
+    }
+
+    /* no room for every label: inactive tabs show just their number */
+    .tab:not(.on) .tab-label {
+        display: none;
+    }
+
+    .pane-body {
+        padding: 28px 16px 28px;
+    }
+
+    .pane-meta {
+        display: none;
+    }
+
+    .prompt {
+        white-space: normal;
+    }
+
+    .status-seg {
+        display: none;
+    }
+
+    .foot {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Touch screens: no hover, a finger for a pointer
+   ───────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+    /* finger-sized targets */
+    .key {
+        display: inline-block;
+        min-width: 36px;
+        padding: 6px 1.2ch;
+        margin: 2px;
+        text-align: center;
+    }
+
+    /* the bar is 40px tall: let its buttons fill it */
+    .lang-btn {
+        padding: 10px 1.2ch;
+    }
+
+    .tab {
+        padding: 10px 10px;
+    }
+
+    .theme-btn {
+        padding: 4px 10px;
+    }
+
+    .pick-btn {
+        padding: 8px 0;
+    }
+
+    .pick.themes li {
+        align-items: center;
+    }
+
+    /* with no hover, ">" marks the item under your finger, and the current theme */
+    .pick li:active::before,
+    .pick.themes li.sel::before {
+        visibility: visible;
+    }
+}
+
+/* the narrowest phones: the bar needs the session label's room for the tabs */
+@media (max-width: 380px) {
+    .session {
+        display: none;
     }
 }
